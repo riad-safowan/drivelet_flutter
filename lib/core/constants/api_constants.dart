@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String baseUrl = 'https://6751b0c0d1983b9597b571e9.mockapi.io/api/v1';
+  static const String baseUrl = 'https://drivelet.riadsafowan.com';
 
   // Headers
   static const Map<String, String> headers = {

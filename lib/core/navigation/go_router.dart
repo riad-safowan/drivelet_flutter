@@ -2,7 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
-import '../../features/vehicles/presentation/pages/vehicle_list_page.dart';
+import '../../features/vehicles/presentation/pages/vehicle_detail/vehicle_detail_page.dart';
+import '../../features/vehicles/presentation/pages/vehicles_list/vehicles_list_page.dart';
 import '../constants/app_constants.dart';
 
 late final GoRouter appRouter;
@@ -30,6 +31,13 @@ Future<void> initRouter() async {
       GoRoute(
         path: '/vehicles',
         builder: (context, state) => const VehiclesListPage(),
+      ),
+      GoRoute(
+        path: '/vehicles/:vehicleId',
+        builder: (context, state) {
+          final vehicleId = state.pathParameters['vehicleId']!;
+          return VehicleDetailPage(vehicleId: vehicleId);
+        },
       ),
     ],
   );
