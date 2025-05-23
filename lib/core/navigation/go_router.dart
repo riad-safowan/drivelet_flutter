@@ -1,3 +1,4 @@
+import 'package:drivelet/features/profile/presentation/pages/profile/profile_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,13 +17,9 @@ Future<void> initRouter() async {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString(AppConstants.tokenKey);
       final isLoggedIn = token != null && token.isNotEmpty;
-      final goingToLogin = state.fullPath == '/login';
 
-      if (!isLoggedIn && !goingToLogin) {
+      if (!isLoggedIn) {
         return '/login';
-      }
-      if (isLoggedIn && goingToLogin) {
-        return '/vehicles';
       }
       return null; // no redirect
     },
@@ -31,6 +28,10 @@ Future<void> initRouter() async {
       GoRoute(
         path: '/vehicles',
         builder: (context, state) => const VehiclesListPage(),
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => const ProfilePage(),
       ),
       GoRoute(
         path: '/vehicles/:vehicleId',

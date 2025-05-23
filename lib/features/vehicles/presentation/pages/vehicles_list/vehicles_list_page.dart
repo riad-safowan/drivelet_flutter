@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../auth/presentation/bloc/auth_bloc.dart';
 import '../../../../auth/presentation/bloc/auth_event.dart';
@@ -18,49 +19,6 @@ class VehiclesListPage extends StatefulWidget {
 }
 
 class _VehiclesListPageState extends State<VehiclesListPage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    if (index == 1) {
-      // go to profile page
-      setState(() {
-        _selectedIndex = 0;
-      });
-    }
-  }
-
-  void _showLogoutDialog(BuildContext ctx) {
-    showDialog(
-      context: ctx,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Logout'),
-          content: const Text('Are you sure you want to logout?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                context.read<AuthBloc>().add(LogoutRequested());
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                      (route) => false,
-                );
-              },
-              child: const Text('Logout'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +37,6 @@ class _VehiclesListPageState extends State<VehiclesListPage> {
                       RefreshVehiclesListRequested(),
                     );
                   },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.logout),
-                  onPressed: () => _showLogoutDialog(context),
                 ),
               ],
             ),
@@ -204,9 +158,13 @@ class _VehiclesListPageState extends State<VehiclesListPage> {
                 ),
                 BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
               ],
-              currentIndex: _selectedIndex,
+              currentIndex: 0,
               selectedItemColor: Colors.blue,
-              onTap: _onItemTapped,
+              onTap: (index) {
+                if(index == 1){
+                  context.push("/profile");
+                }
+              },
             ),
           );
         }

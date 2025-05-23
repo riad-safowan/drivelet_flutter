@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/network/network_info.dart';
 import 'features/auth/auth_di.dart' as auth_di;
+import 'features/profile/profile_di.dart' as profile_di;
 import 'features/vehicles/vehicles_di.dart' as vehicles_di;
 
 final sl = GetIt.instance;
@@ -14,7 +15,7 @@ Future<void> initDI() async {
   _initCoreDependencies();
   await auth_di.init();
   await vehicles_di.init();
-  // await profile_di.init();
+  await profile_di.init();
 }
 
 Future<void> _initExternalDependencies() async {
