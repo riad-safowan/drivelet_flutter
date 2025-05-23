@@ -13,8 +13,9 @@ class VehicleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      elevation: 2,
+      elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
@@ -116,7 +117,7 @@ class VehicleCard extends StatelessWidget {
                           color: Colors.green,
                         ),
                         Text(
-                          '${vehicle.costPerMinute}/min',
+                          '${vehicle.costPerMinute.toStringAsFixed(2)}/min',
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.green,

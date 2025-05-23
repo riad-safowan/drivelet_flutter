@@ -3,6 +3,11 @@
         android:label="drivelet"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBMaw0u4M9EzVzE3tcOBTKMD5kuciN8MIg" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

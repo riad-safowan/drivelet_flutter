@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../auth/presentation/widgets/custom_button.dart';
 import '../../../domain/entities/vehicle.dart';
@@ -39,7 +40,7 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
           title: const Text('Start Rental'),
           content: Text(
             'Are you sure you want to start renting ${vehicle.name}?\n\n'
-            'Cost: ${vehicle.costPerMinute}/minute',
+            'Cost: ${vehicle.costPerMinute.toStringAsFixed(2)}/minute',
           ),
           actions: [
             TextButton(
@@ -163,7 +164,7 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
           // Vehicle Image
           Container(
             width: double.infinity,
-            height: 250,
+            height: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
@@ -241,7 +242,7 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                 child: _buildInfoCard(
                   icon: Icons.attach_money,
                   title: 'Cost',
-                  value: '${vehicle.costPerMinute}/min',
+                  value: '${vehicle.costPerMinute.toStringAsFixed(2)}/min',
                   color: Colors.green,
                 ),
               ),
@@ -278,14 +279,48 @@ class _VehicleDetailPageState extends State<VehicleDetailPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  'Latitude: ${vehicle.location.lat.toStringAsFixed(6)}',
-                  style: TextStyle(fontSize: 14, color: Colors.blue.shade600),
-                ),
-                Text(
-                  'Longitude: ${vehicle.location.lng.toStringAsFixed(6)}',
-                  style: TextStyle(fontSize: 14, color: Colors.blue.shade600),
+                const SizedBox(height: 12),
+                Container(
+                  height: 200, // Set desired height
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.blue.shade100),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(
+                          vehicle.location.lat,
+                          vehicle.location.lng,
+                        ),
+                        zoom: 15.0,
+                      ),
+                      markers: {
+                        Marker(
+                          markerId: const MarkerId('vehicle_location'),
+                          position: LatLng(
+                            vehicle.location.lat,
+                            vehicle.location.lng,
+                          ),
+                          infoWindow: InfoWindow(
+                            title: 'Vehicle Location',
+                            snippet:
+                                '${vehicle.location.lat.toStringAsFixed(6)}, ${vehicle.location.lng.toStringAsFixed(6)}',
+                          ),
+                        ),
+                      },
+                      mapType: MapType.normal,
+                      myLocationEnabled: false,
+                      myLocationButtonEnabled: false,
+                      zoomControlsEnabled: true,
+                      compassEnabled: true,
+                      scrollGesturesEnabled: true,
+                      zoomGesturesEnabled: true,
+                      rotateGesturesEnabled: true,
+                      tiltGesturesEnabled: true,
+                    ),
+                  ),
                 ),
               ],
             ),

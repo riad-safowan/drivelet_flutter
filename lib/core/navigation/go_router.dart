@@ -11,7 +11,7 @@ late final GoRouter appRouter;
 Future<void> initRouter() async {
   appRouter = GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/',
+    initialLocation: '/vehicles',
     redirect: (context, state) async {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString(AppConstants.tokenKey);
