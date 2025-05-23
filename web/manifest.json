@@ -1,6 +1,6 @@
 {
-    "name": "drivelet",
-    "short_name": "drivelet",
+    "name": "Drivelet",
+    "short_name": "Drivelet",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

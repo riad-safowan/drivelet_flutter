@@ -21,25 +21,31 @@ class VehiclesRepositoryImpl implements VehiclesRepository {
 
   @override
   Future<Either<Failure, List<Vehicle>>> getVehiclesList() async {
-    if (await networkInfo.isConnected) {
+    final isConnected = await networkInfo.isConnected;
+    if (isConnected) {
       try {
         final remoteVehicles = await remoteDataSource.getVehiclesList();
         await localDataSource.cacheVehicles(remoteVehicles);
         return Right(remoteVehicles);
       } on ServerException catch (e) {
-        return Left(ServerFailure(e.message));
+        //couldn't connect to server. try to get cached data
+        return getCachedVehicles();
       } catch (e) {
         return Left(ServerFailure('Unexpected error: ${e.toString()}'));
       }
     } else {
-      try {
-        final localVehicles = await localDataSource.getLastVehicles();
-        return Right(localVehicles);
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
-      } catch (e) {
-        return Left(NetworkFailure('No internet connection and no cached data'));
-      }
+      return getCachedVehicles();
+    }
+  }
+
+  Future<Either<Failure, List<Vehicle>>> getCachedVehicles() async {
+    try {
+      final localVehicles = await localDataSource.getLastVehicles();
+      return Right(localVehicles);
+    } on CacheException catch (e) {
+      return Left(CacheFailure(e.message));
+    } catch (e) {
+      return Left(NetworkFailure('No internet connection and no cached data'));
     }
   }
 

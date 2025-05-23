@@ -1,4 +1,4 @@
-import 'package:drivelet/features/profile/presentation/pages/profile/bloc/profile_bloc.dart';
+import 'package:Drivelet/features/profile/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../core/network/network_info.dart';

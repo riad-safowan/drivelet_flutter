@@ -1,5 +1,5 @@
-import 'package:drivelet/features/vehicles/presentation/pages/vehicle_detail/bloc/vehicle_detail_bloc.dart';
-import 'package:drivelet/features/vehicles/presentation/pages/vehicles_list/bloc/vehicles_list_bloc.dart';
+import 'package:Drivelet/features/vehicles/presentation/pages/vehicle_detail/bloc/vehicle_detail_bloc.dart';
+import 'package:Drivelet/features/vehicles/presentation/pages/vehicles_list/bloc/vehicles_list_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import 'data/data_sources/vehicle_remote_data_source.dart';

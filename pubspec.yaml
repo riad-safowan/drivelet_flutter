@@ -1,7 +1,7 @@
-name: drivelet
+name: Drivelet
 description: "A Vehicle Rental App"
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -23,6 +23,7 @@ dependencies:
   dartz: ^0.10.1
   cached_network_image: ^3.4.1
   google_maps_flutter: ^2.12.2
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,15 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
 
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/app_icon.png"
+  min_sdk_android: 21
+
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/
