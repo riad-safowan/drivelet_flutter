@@ -13,6 +13,7 @@ A cross-platform Flutter application for vehicle rentals featuring clean archite
 - **Authentication**: Login with demo credentials
 - **Vehicle List**: Browse available vehicles with real-time status
 - **Vehicle Details**: View detailed information including location, battery, and cost
+- **Google Maps API**: To view the location from the lat,lng provided.
 - **Rental Management**: Start vehicle rentals with confirmation
 - **User Profile**: View user statistics and trip history
 - **Offline Support**: Cached data for offline viewing
